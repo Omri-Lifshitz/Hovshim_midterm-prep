@@ -548,7 +548,7 @@ document.getElementById('orig').onclick=()=>{document.querySelectorAll('.hd,nav'
  order=null;save();hs.forEach((h,i)=>{const first=qs.filter(q=>q.querySelector('.tag').textContent===h.textContent.split(' – ')[0]).sort((a,b)=>a.dataset.idx-b.dataset.idx)[0];if(first)list.insertBefore(h,first)})};
 function setMode(on,reset){exam=on;document.body.classList.toggle('exam',exam);document.getElementById('mode').textContent='מצב מבחן: '+(exam?'פעיל':'כבוי');
  document.getElementById('fin').hidden=!exam;if(reset)resetAll()}
-document.getElementById('mode').onclick=()=>setMode(!exam,true);
+document.getElementById('mode').onclick=()=>{setMode(!exam,false);counted={};qs.forEach(q=>{q.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));q.querySelector('.res').innerHTML='';q.querySelector('details').open=false});upd()};
 function resetAll(){counted={};qs.forEach(q=>{q.querySelectorAll('input').forEach(i=>i.checked=false);q.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));q.querySelector('.res').innerHTML='';q.querySelector('details').open=false});upd()}
 document.getElementById('reset').onclick=resetAll;
 document.getElementById('fin').onclick=()=>{let ok=0,n=0;qs.forEach(q=>{const v=grade(q,true);if(v!==null){n++;if(v)ok++}});
